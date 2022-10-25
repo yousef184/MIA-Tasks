@@ -3,7 +3,7 @@
 #include <std_msgs/Float32.h>
 #include <Timer.h>
 
-#define resolution 540;
+#define resolution 540
 
 //intiallizing nodehandler
 ros::NodeHandle  nh;
@@ -30,7 +30,7 @@ void messageCb(const std_msgs::Float32 &msg)
 {
   motorRpm = msg.data;
 }
-ros::Subscriber<std_msgs::Empty> sub("motorSpeed", &messageCb );
+ros::Subscriber<std_msgs::Float32> sub("motorSpeed", &messageCb );
 
 void setup()
 {
@@ -70,7 +70,7 @@ void function()
   errorSum += (error * timeChange);
   //output pmw
   float output = kp * error + ki * errorSum + kd * errorSlope;
-  analogWrite(pwmM,output);
+  analogWrite(pwm,output);
 }
 
 
